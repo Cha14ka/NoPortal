@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#define GAME_PATH	"NoPortal"	// default dir to start from
+#define GAME_PATH	"NoPortal"
 
 typedef void (*pfnChangeGame)( const char *progname );
 typedef int (*pfnInit)( const char *progname, int bChangeGame, pfnChangeGame func );
@@ -8,7 +8,7 @@ typedef void (*pfnShutdown)( void );
 
 pfnInit Host_Main;
 pfnShutdown Host_Shutdown = NULL;
-char szGameDir[128]; // safe place to keep gamedir
+char szGameDir[128];
 HINSTANCE	hEngine;
 
 void Sys_Error( const char *errorstring )
@@ -29,7 +29,6 @@ void Sys_LoadEngine( void )
 		Sys_Error( "xash.dll missed 'Host_Main' export" );
 	}
 
-	// this is non-fatal for us but change game will not working
 	Host_Shutdown = (pfnShutdown)GetProcAddress( hEngine, "Host_Shutdown" );
 }
 
